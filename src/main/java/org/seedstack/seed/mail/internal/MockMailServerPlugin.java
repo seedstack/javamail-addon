@@ -14,7 +14,6 @@ import com.google.common.collect.Maps;
 import org.seedstack.seed.it.spi.ITKernelMode;
 import org.seedstack.seed.it.spi.ITRunnerPlugin;
 import org.seedstack.seed.mail.api.WithMailServer;
-import org.seedstack.seed.mail.rule.MockMailServerITClassRule;
 import org.junit.rules.MethodRule;
 import org.junit.rules.TestRule;
 import org.junit.runners.model.TestClass;
