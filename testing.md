@@ -8,15 +8,7 @@ menu:
 ---
 
 JavaMail add-on provides testing fixtures which enable to emulate an SMTP server and easily assert that your sent mails
-are valid. To add the testing tools to your project, use the following dependency snippet:
-
-    <dependency>
-        <groupId>org.seedstack</groupId>
-        <artifactId>seed-javamail-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-    
-You can then use the `@WithMailServer` annotation and the `MessageRetriever` in your tests:
+are valid. You can then use the `@WithMailServer` annotation and the `MessageRetriever` in your tests:
 
     @WithMailServer(host = "localhost", port = 6457)
     public class SmtpIT extends AbstractSeedIT {

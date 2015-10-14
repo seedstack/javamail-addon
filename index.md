@@ -14,8 +14,8 @@ The JavaMail add-on integrates JavaMail API (JSR 919) with SeedStack. To add the
 the following dependency snippet:
 
     <dependency>
-        <groupId>org.seedstack</groupId>
-        <artifactId>seed-javamail-core</artifactId>
+        <groupId>org.seedstack.addons</groupId>
+        <artifactId>javamail</artifactId>
     </dependency>
     
 You may also need to add the JavaMail API (depending on your runtime environment):
