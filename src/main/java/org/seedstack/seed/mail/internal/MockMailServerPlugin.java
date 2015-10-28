@@ -9,6 +9,7 @@ package org.seedstack.seed.mail.internal;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.junit.runners.model.FrameworkMethod;
 import org.seedstack.seed.it.spi.ITKernelMode;
 import org.seedstack.seed.it.spi.ITRunnerPlugin;
 import org.seedstack.seed.mail.api.WithMailServer;
@@ -38,7 +39,7 @@ public class MockMailServerPlugin implements ITRunnerPlugin {
     }
 
     @Override
-    public Map<String, String> provideDefaultConfiguration(TestClass testClass) {
+    public Map<String, String> provideDefaultConfiguration(TestClass testClass, FrameworkMethod method) {
         return Maps.newHashMap();
     }
 
