@@ -26,7 +26,7 @@ import java.util.Map;
  *
  * @author aymen.benhmida@ext.mpsa.com
  */
-public class MockMailServerPlugin implements ITRunnerPlugin {
+public class JavaMailITRunnerPlugin implements ITRunnerPlugin {
 
     @Override
     public List<Class<? extends TestRule>> provideTestRulesToApply(TestClass testClass, Object target) {
@@ -52,7 +52,7 @@ public class MockMailServerPlugin implements ITRunnerPlugin {
     public List<Class<? extends TestRule>> provideClassRulesToApply(TestClass testClass) {
         List<Class<? extends TestRule>> rule = Lists.newArrayList();
         if (testClass.getJavaClass().isAnnotationPresent(WithMailServer.class)) {
-            rule.add(MockMailServerITClassRule.class);
+            rule.add(JavaMailITClassRule.class);
         }
         return rule;
     }

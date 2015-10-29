@@ -7,11 +7,10 @@
  */
 package org.seedstack.seed.mail.internal;
 
-import org.seedstack.seed.it.api.ITBind;
-import org.seedstack.seed.mail.api.WithMailServer;
 import org.junit.rules.ExternalResource;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import org.seedstack.seed.mail.api.WithMailServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.subethamail.wiser.Wiser;
@@ -24,12 +23,9 @@ import java.net.UnknownHostException;
  * This junit Rule is responsible of configuring a (@Link Wiser) instance with parameters
  * provided through (@link WithMailServer) annotation and starting the instance before
  * method test and stopping the instance after test execution
- *
- *
  */
-@ITBind
-public class MockMailServerITClassRule extends ExternalResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MockMailServerITClassRule.class);
+class JavaMailITClassRule extends ExternalResource {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaMailITClassRule.class);
 
     @Inject
     private Wiser mailServer;

@@ -8,7 +8,9 @@
 package org.seedstack.seed.mail.internal;
 
 import com.google.common.collect.Maps;
+import com.google.inject.AbstractModule;
 import org.seedstack.seed.core.internal.application.ApplicationPlugin;
+import org.seedstack.seed.core.utils.SeedReflectionUtils;
 import org.seedstack.seed.mail.spi.SessionConfigurer;
 import io.nuun.kernel.api.Plugin;
 import io.nuun.kernel.api.plugin.InitState;
@@ -73,7 +75,16 @@ public class JavaMailPlugin extends AbstractPlugin {
 
     @Override
     public Object nativeUnitModule() {
-        return new JavaMailModule(sessions);
+        return new AbstractModule() {
+            @Override
+            protected void configure() {
+                install(new JavaMailModule(sessions));
+
+                if (SeedReflectionUtils.isClassPresent("org.subethamail.wiser.Wiser")) {
+                    install(new JavaMailITModule());
+                }
+            }
+        };
     }
 
     @Override
