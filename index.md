@@ -109,8 +109,11 @@ are valid. You can then use the {{< java "org.seedstack.javamail.test.WithMailSe
             }
 
             for (Message message : retriever.getSentMessages()) {
-                MockMailServerAssertions.assertThat(message).hasRecipients(Message.RecipientType.TO);
-                MockMailServerAssertions.assertThat(message).recipientEqualsTo(Message.RecipientType.TO, InternetAddress.parse(TestConstantsValues.DEFAULT_RECIPIENT));
+                MockMailServerAssertions.assertThat(message)
+                    .hasRecipients(Message.RecipientType.TO);
+                MockMailServerAssertions.assertThat(message)
+                    .recipientEqualsTo(Message.RecipientType.TO,
+                            InternetAddress.parse(TestConstantsValues.DEFAULT_RECIPIENT));
             }
         }
     }
