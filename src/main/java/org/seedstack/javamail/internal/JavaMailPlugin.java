@@ -7,20 +7,18 @@
  */
 package org.seedstack.javamail.internal;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.AbstractModule;
-import io.nuun.kernel.api.Plugin;
 import io.nuun.kernel.api.plugin.InitState;
-import io.nuun.kernel.api.plugin.PluginException;
 import io.nuun.kernel.api.plugin.context.InitContext;
 import io.nuun.kernel.core.AbstractPlugin;
 import org.apache.commons.configuration.Configuration;
 import org.seedstack.javamail.spi.SessionConfigurer;
-import org.seedstack.seed.core.internal.application.ApplicationPlugin;
+import org.seedstack.seed.core.spi.configuration.ConfigurationProvider;
 import org.seedstack.seed.core.utils.SeedReflectionUtils;
 
 import javax.mail.Session;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -42,35 +40,13 @@ public class JavaMailPlugin extends AbstractPlugin {
 
     @Override
     public InitState init(InitContext initContext) {
-        Configuration mailSessionsConfiguration = null;
-
-        for (Plugin deployedPlugin : initContext.pluginsRequired()) {
-            mailSessionsConfiguration = getPluginConfiguration(deployedPlugin);
-        }
-
-        failIfConfigurationIsAbsent(mailSessionsConfiguration);
+        Configuration mailSessionsConfiguration = initContext.dependency(ConfigurationProvider.class)
+                .getConfiguration().subset(JavaMailPlugin.CONFIGURATION_PREFIX);
 
         SessionConfigurer configurer = new PropertyFileSessionConfigurer(mailSessionsConfiguration);
         sessions.putAll(configurer.doConfigure());
 
         return InitState.INITIALIZED;
-    }
-
-    void failIfConfigurationIsAbsent(Configuration mailSessionsConfiguration) {
-        if (mailSessionsConfiguration == null) {
-            throw new PluginException("Unable to find mail plugin configuration");
-        }
-    }
-
-    Configuration getPluginConfiguration(Plugin deployedPlugin) {
-        Configuration mailSessionsConfiguration = null;
-
-        if (deployedPlugin instanceof ApplicationPlugin) {
-            ApplicationPlugin applicationPlugin = (ApplicationPlugin) deployedPlugin;
-            mailSessionsConfiguration = applicationPlugin.getApplication().getConfiguration().subset(JavaMailPlugin.CONFIGURATION_PREFIX);
-        }
-
-        return mailSessionsConfiguration;
     }
 
     @Override
@@ -88,9 +64,7 @@ public class JavaMailPlugin extends AbstractPlugin {
     }
 
     @Override
-    public Collection<Class<? extends Plugin>> requiredPlugins() {
-        ArrayList<Class<? extends Plugin>> plugins = new ArrayList<Class<? extends Plugin>>();
-        plugins.add(ApplicationPlugin.class);
-        return plugins;
+    public Collection<Class<?>> requiredPlugins() {
+        return Lists.<Class<?>>newArrayList(ConfigurationProvider.class);
     }
 }
