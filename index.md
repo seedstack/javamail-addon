@@ -1,11 +1,20 @@
 ---
-title: "Overview"
-addon: "JavaMail"
+title: "Basics"
+name: "JavaMail"
 repo: "https://github.com/seedstack/javamail-addon"
 author: "SeedStack"
 description: "Integrates JavaMail (JSR 919) with SeedStack. Allows sending and receiving of e-mail messages over POP3, IMAP and SMTP. Provides testing tools."
 min-version: "15.11+"
 backend: true
+weight: -1
+tags:
+    - "mail"
+    - "email"
+    - "smtp"
+    - "pop"
+    - "imap"
+zones:
+    - Addons
 menu:
     JavaMailAddon:
         weight: 10
