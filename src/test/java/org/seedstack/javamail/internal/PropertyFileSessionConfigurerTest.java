@@ -31,7 +31,7 @@ public class PropertyFileSessionConfigurerTest {
         Props props = new Props();
         Map<String, Object> config = new HashMap<String, Object>();
         props.load(PropertyFileSessionConfigurerTest.class.getResourceAsStream("/test.props"));
-        props.extractBaseProps(config);
+        props.extractProps(config);
         Configuration configuration = new MapConfiguration(config);
         assertThat(config).isNotEmpty();
         assertThat(configuration).isNotNull();
