@@ -7,7 +7,5 @@
  */
 /**
  * Provides classes for extending the mail support.
- *
- * @author Pierre Thirouin
  */
 package org.seedstack.javamail.spi;

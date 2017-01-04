@@ -7,36 +7,36 @@
  */
 package org.seedstack.javamail.internal;
 
-import org.seedstack.javamail.spi.SessionConfigurer;
-import jodd.props.Props;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.MapConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.seedstack.coffig.Coffig;
+import org.seedstack.coffig.provider.JacksonProvider;
+import org.seedstack.javamail.JavaMailConfig;
+import org.seedstack.javamail.spi.SessionConfigurer;
+import org.seedstack.shed.ClassLoaders;
 
 import javax.mail.Session;
-import java.util.HashMap;
+import java.net.URL;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class PropertyFileSessionConfigurerTest {
+public class InternalSessionConfigurerTest {
     private Map<String, Session> sessionsConfig;
 
     @Before
     public void setUp() throws Exception {
-        Props props = new Props();
-        Map<String, Object> config = new HashMap<String, Object>();
-        props.load(PropertyFileSessionConfigurerTest.class.getResourceAsStream("/test.props"));
-        props.extractProps(config);
-        Configuration configuration = new MapConfiguration(config);
-        assertThat(config).isNotEmpty();
-        assertThat(configuration).isNotNull();
-
-        SessionConfigurer configurer = new PropertyFileSessionConfigurer(configuration.subset(JavaMailPlugin.CONFIGURATION_PREFIX));
+        JacksonProvider jacksonProvider = new JacksonProvider();
+        URL testConfig = ClassLoaders.findMostCompleteClassLoader(InternalSessionConfigurerTest.class).getResource("test.yaml");
+        if (testConfig == null) {
+            throw new IllegalStateException("Unable to find test config");
+        }
+        jacksonProvider.addSource(testConfig);
+        Coffig coffig = Coffig.builder().withProviders(jacksonProvider).build();
+        SessionConfigurer configurer = new InternalSessionConfigurer(coffig.get(JavaMailConfig.class));
         this.sessionsConfig = configurer.doConfigure();
     }
 

@@ -7,7 +7,7 @@
  */
 package org.seedstack.javamail.test;
 
-import org.seedstack.seed.ErrorCode;
+import org.seedstack.shed.exception.ErrorCode;
 
 enum MailAssertionsErrorCodes implements ErrorCode {
     NO_MAIL_PROVIDER_FOUND,

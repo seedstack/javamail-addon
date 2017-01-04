@@ -15,8 +15,6 @@ import java.lang.annotation.Target;
 /**
  * Any class annotated with annotation would benefit of a mock mail
  * server instance launched which can be used to test against sending mails
- *
- * @author aymen.benhmida@ext.mpsa.com
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

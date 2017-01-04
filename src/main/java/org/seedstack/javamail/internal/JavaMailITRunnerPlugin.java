@@ -23,8 +23,6 @@ import java.util.Map;
 /**
  * This plugin is responsible for providing the testing infrastructure for application that
  * used the mail plugin for configuring and sending emails
- *
- * @author aymen.benhmida@ext.mpsa.com
  */
 public class JavaMailITRunnerPlugin implements ITRunnerPlugin {
 
@@ -39,7 +37,7 @@ public class JavaMailITRunnerPlugin implements ITRunnerPlugin {
     }
 
     @Override
-    public Map<String, String> provideDefaultConfiguration(TestClass testClass, FrameworkMethod method) {
+    public Map<String, String> provideConfiguration(TestClass testClass, FrameworkMethod method) {
         return Maps.newHashMap();
     }
 

@@ -7,7 +7,5 @@
  */
 /**
  * Provides classes for testing the mail features.
- *
- * @author Pierre Thirouin
  */
 package org.seedstack.javamail.test;

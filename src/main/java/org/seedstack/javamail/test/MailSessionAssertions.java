@@ -22,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Assertion class over mail session.
  *
  * @param <S> the assertion class
- * @author aymen.benhmida@ext.mpsa.com
  */
 public class MailSessionAssertions<S extends Session> extends AbstractAssert<MailSessionAssertions<Session>, Session> {
     private Session session;

@@ -11,17 +11,14 @@ import javax.mail.Session;
 import java.util.Map;
 
 /**
- * interface for handling session configuration.
- * <p>
- * must be implemented by classes which wishes to provide configured sessions to be used elsewhere
- * Created by E442250 on 05/05/2014.
+ * Interface for handling session configuration. Must be implemented by classes wanting to provide configured mail
+ * sessions.
  */
 public interface SessionConfigurer {
     /**
-     * this method configure the sessions based on properties provided
-     * in the configuration files
+     * This method must return the mail sessions to configure.
      *
-     * @return a map of sessions with provider protocol as key and the given session as value
+     * @return a map of sessions with provider name as key and the given session as value
      */
     Map<String, Session> doConfigure();
 }

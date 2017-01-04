@@ -34,7 +34,6 @@ import static org.seedstack.javamail.test.MailAssertionsErrorCodes.*;
  * Assertion class over messages received by the mock server in order to verify their integrity
  *
  * @param <S> the assertion class
- * @author aymen.benhmida@ext.mpsa.com
  */
 public class MailMessagesAssertions<S extends Message> extends AbstractAssert<MailMessagesAssertions<S>, Message> {
     @Inject

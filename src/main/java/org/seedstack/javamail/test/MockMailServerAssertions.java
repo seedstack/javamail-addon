@@ -12,8 +12,6 @@ import javax.mail.Session;
 
 /**
  * Assertion class over mail server.
- *
- * @author aymen.benhmida@ext.mpsa.com
  */
 public final class MockMailServerAssertions {
     private MockMailServerAssertions() {

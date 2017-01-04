@@ -7,30 +7,23 @@
  */
 package org.seedstack.javamail.internal;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.AbstractModule;
 import io.nuun.kernel.api.plugin.InitState;
 import io.nuun.kernel.api.plugin.context.InitContext;
-import io.nuun.kernel.core.AbstractPlugin;
-import org.apache.commons.configuration.Configuration;
+import org.seedstack.javamail.JavaMailConfig;
 import org.seedstack.javamail.spi.SessionConfigurer;
-import org.seedstack.seed.core.spi.configuration.ConfigurationProvider;
-import org.seedstack.seed.core.utils.SeedReflectionUtils;
+import org.seedstack.seed.core.internal.AbstractSeedPlugin;
+import org.seedstack.shed.reflect.Classes;
 
 import javax.mail.Session;
-import java.util.Collection;
 import java.util.Map;
 
 /**
  * This plugin is responsible for providing injectable JavaMail @see (javax.mail.Session) sessions based on the different
  * protocol providers configured in the configuration files a number of instances will be created.
- *
- * @author aymen.benhmida@ext.mpsa.com
  */
-public class JavaMailPlugin extends AbstractPlugin {
-    public static final String CONFIGURATION_PREFIX = "org.seedstack.seed.mail";
-
+public class JavaMailPlugin extends AbstractSeedPlugin {
     private final Map<String, Session> sessions = Maps.newHashMap();
 
     @Override
@@ -39,11 +32,10 @@ public class JavaMailPlugin extends AbstractPlugin {
     }
 
     @Override
-    public InitState init(InitContext initContext) {
-        Configuration mailSessionsConfiguration = initContext.dependency(ConfigurationProvider.class)
-                .getConfiguration().subset(JavaMailPlugin.CONFIGURATION_PREFIX);
+    public InitState initialize(InitContext initContext) {
+        JavaMailConfig javaMailConfig = getConfiguration(JavaMailConfig.class);
 
-        SessionConfigurer configurer = new PropertyFileSessionConfigurer(mailSessionsConfiguration);
+        SessionConfigurer configurer = new InternalSessionConfigurer(javaMailConfig);
         sessions.putAll(configurer.doConfigure());
 
         return InitState.INITIALIZED;
@@ -56,15 +48,10 @@ public class JavaMailPlugin extends AbstractPlugin {
             protected void configure() {
                 install(new JavaMailModule(sessions));
 
-                if (SeedReflectionUtils.isClassPresent("org.subethamail.wiser.Wiser")) {
+                if (Classes.optional("org.subethamail.wiser.Wiser").isPresent()) {
                     install(new JavaMailITModule());
                 }
             }
         };
-    }
-
-    @Override
-    public Collection<Class<?>> requiredPlugins() {
-        return Lists.<Class<?>>newArrayList(ConfigurationProvider.class);
     }
 }

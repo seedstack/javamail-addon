@@ -1,0 +1,31 @@
+#
+# Copyright (c) 2013-2016, The SeedStack authors <http://seedstack.org>
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+
+javamail:
+  providers:
+    smtp:
+      mail.transport.protocol: smtp
+      mail.smtp.host: testserver
+      mail.smtp.auth: true
+      mail.smtp.user: testuser
+      mail.smtp.password: testpw
+    smtp2:
+      mail.transport.protocol: smtp
+      mail.smtp.host: testserver2
+      mail.smtp.auth: true
+      mail.smtp.user: testuser2
+      mail.smtp.password: testpw2
+    imap:
+      mail.store.protocol: imap
+      mail.imap.user: toto_user@ext.mpsa.com
+      mail.imap.host: testserver3
+      mail.imap.auth.login.disable: false
+      mail.imap.auth.plain.disable: true
+    pop3:
+      mail.store.protocol: pop3
+      mail.pop3.host: testserver4

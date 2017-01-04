@@ -12,8 +12,6 @@ import javax.mail.Message;
 /**
  * This a helper interface for retrieving messages that where sent to the Wiser Server
  * its only purpose is alleviate the user from knowing about the MockServer used.
- *
- * @author aymen.benhmida@ext.mpsa.com
  */
 public interface MessageRetriever {
     /**
