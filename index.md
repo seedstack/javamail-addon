@@ -1,12 +1,8 @@
 ---
-title: "Basics"
-name: "JavaMail"
+title: "JavaMail"
 repo: "https://github.com/seedstack/javamail-addon"
-date: 2015-11-15
 author: Aymen BENHMIDA
 description: "Integrates JavaMail (JSR 919) for sending and receiving of e-mail messages over POP3, IMAP and SMTP."
-backend: true
-weight: -1
 tags:
     - "mail"
     - "email"
