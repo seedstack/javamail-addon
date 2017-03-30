@@ -3,12 +3,6 @@ title: "JavaMail"
 repo: "https://github.com/seedstack/javamail-addon"
 author: Aymen BENHMIDA
 description: "Integrates JavaMail (JSR 919) for sending and receiving of e-mail messages over POP3, IMAP and SMTP."
-tags:
-    - "mail"
-    - "email"
-    - "smtp"
-    - "pop"
-    - "imap"
 zones:
     - Addons
 menu:
