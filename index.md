@@ -1,18 +1,17 @@
 ---
 title: "JavaMail"
+addon: "JavaMail"
 repo: "https://github.com/seedstack/javamail-addon"
 author: Aymen BENHMIDA
 description: "Integrates JavaMail (JSR 919) for sending and receiving of e-mail messages over POP3, IMAP and SMTP."
 zones:
     - Addons
-menu:
-    JavaMailAddon:
-        weight: 10
+noMenu: true    
 ---
 
 The JavaMail add-on integrates JavaMail API (JSR 919) with SeedStack.<!--more--> 
 
-# Dependency
+## Dependency
 
 {{< dependency g="org.seedstack.addons.javamail" a="javamail" >}}
 
@@ -23,7 +22,7 @@ You also need to add the JavaMail API itself:
 Note that you need to specify the scope as `provided` if your runtime environment already provides the JavaMail API 
 (such as JEE servers).
 
-# Configuration
+## Configuration
 
 Configuration is done by declaring one or more mail providers:
 
@@ -43,7 +42,7 @@ Note that providers are fully configured by specifying [JavaMail session propert
 {{% /callout %}}
 
 
-## SMTP
+### SMTP
 
 To configure an SMTP provider, use the following configuration:
 
@@ -56,7 +55,7 @@ javamail:
       mail.smtp.port: ...
 ```
 
-## IMAP
+### IMAP
 
 To configure an IMAP provider, use the following configuration:
 
@@ -70,7 +69,7 @@ javamail:
       mail.imap.port: ...
 ```
 
-## POP3
+### POP3
 
 To configure a POP3 provider, use the following configuration:
 
@@ -84,7 +83,7 @@ javamail:
       mail.pop3.port: ...
 ```
 
-# Usage
+## Usage
 
 The configured providers will be injectable as a fully-configured JavaMail session:
  
@@ -100,7 +99,7 @@ public class SomeClass {
 Use the [JavaMail API documentation](https://javamail.java.net/nonav/docs/api/) to know more about usage.
 {{% /callout %}}
 
-# Testing
+## Testing
 
 JavaMail add-on provides testing fixtures which enable to emulate an SMTP server and easily assert that your sent mails
 are valid. Consider the following test configuration:
